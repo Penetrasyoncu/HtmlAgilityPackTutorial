@@ -82,38 +82,27 @@ namespace HtmlAgilityPackTutorial
                 ((Range)sheet1.Cells[i, 2]).Value2 = UrunList[i - 1].Aciklama;
                 ((Range)sheet1.Cells[i, 3]).Value2 = UrunList[i - 1].Beden;
             }
-           
+
             //Mail Gönderme
             try
-            {
-                MailMessage message = new MailMessage();
-                SmtpClient smtp = new SmtpClient();
-
-                message.From = new MailAddress("test37@gmail.com");
-                message.To.Add(new MailAddress("ademokuyucu37@gmail.com"));
-                message.Subject = "Excel Verileri";
-                message.Body = "İçerik";
-
-                smtp.Port = 587;
-                smtp.Host = "smtp.gmail.com";
-                smtp.EnableSsl = true;
-                smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new NetworkCredential("ademokuyucu37@gmail.com", "pwd");
-                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                smtp.Send(message);
-                MessageBox.Show("Mail Başarıyla Gönderildi");
+            {                
+                Mail mail = new Mail();
+                mail.konu = "Test Konu";
+                mail.alici = "ibrahim.okuyucu@setup34.com.tr";
+                mail.icerik = "Test İçerik";
+                mail.attachKonum = @"C:\Users\ibrah\Desktop\HtmlAgilityPackTutorial - New\URL.xlsx";
+                mail.Gonder();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-                       
         }
 
         private void listBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
-        
+
     }
 }
